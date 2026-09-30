@@ -1,3 +1,4 @@
+from src.state.models import ClaimStatus
 from src.state.models import (
     Document,
     Chunk,
@@ -56,3 +57,4 @@ def test_state_objects_can_be_linked():
     assert block.claim_ids == [claim.claim_id]
     assert intent.block_ids == [block.block_id]
     assert session.intent_ids == [intent.intent_id]
+    assert claim.status == ClaimStatus.ACTIVE

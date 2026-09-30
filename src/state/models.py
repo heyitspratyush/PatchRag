@@ -1,7 +1,12 @@
 from pydantic import BaseModel
 
 
+from enum import Enum
 
+class ClaimStatus(str,Enum):
+    ACTIVE = "ACTIVE"
+    STALE = "STALE"
+    SUPERSEDED = "SUPERSEDED"
 
 class Document(BaseModel):
     document_id : str
@@ -23,6 +28,7 @@ class Claim(BaseModel):
     claim_id : str
     claim_text : str
     evidence_ids : list[str]
+    status: ClaimStatus = ClaimStatus.ACTIVE
 
 class Block(BaseModel):
     block_id : str
