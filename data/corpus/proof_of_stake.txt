@@ -1,0 +1,5 @@
+Proof of Stake is a consensus mechanism in which participants can be selected to help propose or validate blocks based on stake held in the system and according to the protocol's rules.
+
+Unlike Proof of Work, Proof of Stake does not require participants to continuously compete by performing large amounts of computational work. Participants instead commit or lock stake according to the requirements of the particular blockchain protocol.
+
+Because it does not depend on large-scale computational competition in the same way as Proof of Work, Proof of Stake can require substantially less computational energy for consensus. The exact resource requirements depend on the design and implementation of the blockchain system.

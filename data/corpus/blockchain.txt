@@ -1,0 +1,5 @@
+Blockchain is a distributed digital record system in which transactions are recorded across a network of computers. Instead of relying on a single central authority to maintain the record, participating nodes maintain copies of the ledger and use a consensus mechanism to agree on its state.
+
+A blockchain is typically organized as a sequence of blocks. Each block contains transaction data and information that links it to the previous block. This linking helps make unauthorized modification of previously recorded data detectable.
+
+Different blockchain systems use different consensus mechanisms. Proof of Work and Proof of Stake are two examples. They differ in how participants are selected to help maintain consensus and how resources are used.

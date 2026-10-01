@@ -1,0 +1,5 @@
+Proof of Work is a consensus mechanism in which participants compete by performing computational work. A participant typically searches for a value that satisfies a computational condition defined by the protocol.
+
+The computational requirement makes it costly to repeatedly attempt to produce valid blocks. Participants that successfully satisfy the required condition can have their proposed block accepted according to the rules of the blockchain system.
+
+Because Proof of Work requires computational resources, its operation can involve substantial electricity consumption. The amount of energy used depends on factors such as the computational hardware, network activity, and energy efficiency of the participating infrastructure.
