@@ -3,7 +3,7 @@ import torch
 
 from src.retrieval.embedder import mean_pooling
 from src.retrieval.embedder import embed_text
-
+from src.retrieval.embedder import embed_texts
 
 def test_mean_pooling_ignores_padding():
     last_hidden_state = torch.tensor([
@@ -67,3 +67,51 @@ def test_embed_text_output_shape():
     embedding = embed_text(text)
 
     assert embedding.shape == (1, 384)
+
+from src.retrieval.embedder import embed_texts
+
+
+def test_embed_texts_output_shape():
+    texts = [
+        "Proof of Work uses computational work.",
+        "Proof of Stake uses stake.",
+        "Blockchain stores linked blocks."
+    ]
+
+    embeddings = embed_texts(texts)
+
+    assert embeddings.shape == (3, 384)
+
+from src.retrieval.embedder import normalize_embeddings
+
+
+def test_normalize_embeddings():
+    embeddings = torch.tensor([
+        [3.0, 4.0],
+        [5.0, 12.0]
+    ])
+
+    normalized = normalize_embeddings(embeddings)
+
+    expected = torch.tensor([
+        [0.6, 0.8],
+        [0.38461538, 0.92307692]
+    ])
+
+    assert torch.allclose(normalized, expected)
+
+def test_embed_texts_are_normalized():
+    texts = [
+        "Proof of Work uses computational work.",
+        "Proof of Stake uses stake."
+    ]
+
+    embeddings = embed_texts(texts)
+
+    norms = torch.linalg.vector_norm(embeddings, dim=1)
+
+    assert torch.allclose(
+        norms,
+        torch.ones(2),
+        atol=1e-6
+    )

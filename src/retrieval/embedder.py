@@ -1,5 +1,6 @@
 import torch
 from transformers import AutoTokenizer,AutoModel
+import torch.nn.functional as F
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
@@ -23,7 +24,21 @@ def mean_pooling(last_hidden_state,attention_mask):
 
 def embed_text(text):
     encoded = tokenizer(text, return_tensors="pt")
+    model.eval()
     with torch.no_grad():
         outputs = model(**encoded)
     embedding = mean_pooling(outputs.last_hidden_state, encoded['attention_mask'])
-    return embedding
+    normalized_embedding = normalize_embeddings(embedding)
+    return normalized_embedding
+
+def embed_texts(texts):
+    encoded = tokenizer(texts, return_tensors="pt", padding=True)
+    model.eval()
+    with torch.no_grad():
+        outputs = model(**encoded)
+    embeddings = mean_pooling(outputs.last_hidden_state, encoded['attention_mask'])
+    normalized_embeddings = normalize_embeddings(embeddings)
+    return normalized_embeddings
+
+def normalize_embeddings(embeddings):
+    return F.normalize(embeddings,p=2,dim=1)
