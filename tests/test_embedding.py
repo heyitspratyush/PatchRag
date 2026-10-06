@@ -2,6 +2,7 @@
 import torch
 
 from src.retrieval.embedder import mean_pooling
+from src.retrieval.embedder import embed_text
 
 
 def test_mean_pooling_ignores_padding():
@@ -56,3 +57,13 @@ def test_mean_pooling_output_shape():
     )
 
     assert result.shape == (2, 3)
+
+
+
+
+def test_embed_text_output_shape():
+    text = "Proof of Work uses computational work."
+
+    embedding = embed_text(text)
+
+    assert embedding.shape == (1, 384)
